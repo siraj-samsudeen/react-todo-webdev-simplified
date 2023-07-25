@@ -2,7 +2,33 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-  return <div>Hello world</div>;
+  return (
+    <div className="container">
+      <h1>Todo List App</h1>
+      <form>
+        <label htmlFor="todo-text">New Item</label>
+        <input type="text" name="todo-text" id="todo-text" />
+        <button type="submit">Add</button>
+      </form>
+      <h2>Todo Items</h2>
+      <ul>
+        <li>
+          <label>
+            <input type="checkbox" />
+            Todo1
+          </label>
+          <button>Delete</button>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" />
+            Todo2
+          </label>
+          <button>Delete</button>
+        </li>
+      </ul>
+    </div>
+  );
 }
 
 export default App;
