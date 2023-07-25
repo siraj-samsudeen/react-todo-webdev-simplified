@@ -2,6 +2,11 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const initialTodos = [
+    { id: 1, text: 'Todo1', completed: false },
+    { id: 2, text: 'Todo2', completed: true },
+  ];
+  const [todos, setTodos] = useState(initialTodos);
   return (
     <div className="container">
       <h1>Todo List App</h1>
@@ -14,20 +19,15 @@ function App() {
       </form>
       <h2>Todo Items</h2>
       <ul>
-        <li>
-          <label>
-            <input type="checkbox" />
-            Todo1
-          </label>
-          <button className="delete">Delete</button>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" />
-            Todo2
-          </label>
-          <button className="delete">Delete</button>
-        </li>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <label>
+              <input type="checkbox" checked={todo.completed} />
+              {todo.text}
+            </label>
+            <button className="delete">Delete</button>
+          </li>
+        ))}
       </ul>
     </div>
   );
