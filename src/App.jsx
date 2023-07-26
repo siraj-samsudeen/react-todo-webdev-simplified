@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { v4 as uuidv4 } from 'uuid';
 
 function AddTodoForm({ newTodo, setNewTodo, setTodos }) {
+  const inputRef = useRef(null);
+
   function addTodo(event) {
     event.preventDefault();
     const newTodoObj = {
@@ -12,7 +14,12 @@ function AddTodoForm({ newTodo, setNewTodo, setTodos }) {
     };
     setTodos((prevTodos) => [...prevTodos, newTodoObj]);
     setNewTodo('');
+    inputRef.current.focus();
   }
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   return (
     <form onSubmit={addTodo}>
@@ -23,6 +30,7 @@ function AddTodoForm({ newTodo, setNewTodo, setTodos }) {
         id="todo-text"
         value={newTodo}
         onChange={(event) => setNewTodo(event.target.value)}
+        ref={inputRef}
       />
       <button className="large" type="submit" disabled={newTodo == ''}>
         Add
