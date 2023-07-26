@@ -1,10 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
 
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem('todos'));
+    if (todos.length > 0) {
+      setTodos(todos);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
   function toggleCompleted(todoId) {
     const updatedTodos = todos.map((todo) =>
       todo.id == todoId ? { ...todo, completed: !todo.completed } : todo
