@@ -7,6 +7,13 @@ function App() {
     { id: 2, text: 'Todo2', completed: true },
   ];
   const [todos, setTodos] = useState(initialTodos);
+
+  function toggleCompleted(todoId) {
+    const updatedTodos = todos.map((todo) =>
+      todo.id == todoId ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(updatedTodos);
+  }
   return (
     <div className="container">
       <h1>Todo List App</h1>
@@ -22,7 +29,11 @@ function App() {
         {todos.map((todo) => (
           <li key={todo.id}>
             <label>
-              <input type="checkbox" checked={todo.completed} />
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => toggleCompleted(todo.id)}
+              />
               {todo.text}
             </label>
             <button className="delete">Delete</button>
