@@ -2,6 +2,34 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { v4 as uuidv4 } from 'uuid';
 
+function AddTodoForm({ newTodo, setNewTodo, setTodos }) {
+  function addTodo(event) {
+    event.preventDefault();
+    const newTodoObj = {
+      id: uuidv4(),
+      text: newTodo,
+      completed: false,
+    };
+    setTodos((prevTodos) => [...prevTodos, newTodoObj]);
+    setNewTodo('');
+  }
+
+  return (
+    <form onSubmit={addTodo}>
+      <label htmlFor="todo-text">New Item</label>
+      <input
+        type="text"
+        name="todo-text"
+        id="todo-text"
+        value={newTodo}
+        onChange={(event) => setNewTodo(event.target.value)}
+      />
+      <button className="large" type="submit" disabled={newTodo == ''}>
+        Add
+      </button>
+    </form>
+  );
+}
 function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
@@ -28,33 +56,14 @@ function App() {
     setTodos(updatedTodos);
   }
 
-  function addTodo(event) {
-    event.preventDefault();
-    const newTodoObj = {
-      id: uuidv4(),
-      text: newTodo,
-      completed: false,
-    };
-    setTodos([...todos, newTodoObj]);
-    setNewTodo('');
-  }
-
   return (
     <div className="container">
       <h1>Todo List App</h1>
-      <form onSubmit={addTodo}>
-        <label htmlFor="todo-text">New Item</label>
-        <input
-          type="text"
-          name="todo-text"
-          id="todo-text"
-          value={newTodo}
-          onChange={(event) => setNewTodo(event.target.value)}
-        />
-        <button className="large" type="submit" disabled={newTodo == ''}>
-          Add
-        </button>
-      </form>
+      <AddTodoForm
+        newTodo={newTodo}
+        setNewTodo={setNewTodo}
+        setTodos={setTodos}
+      />
       {todos.length > 0 && (
         <>
           <h2>Todo Items</h2>
