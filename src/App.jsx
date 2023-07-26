@@ -51,7 +51,7 @@ function App() {
           value={newTodo}
           onChange={(event) => setNewTodo(event.target.value)}
         />
-        <button className="large" type="submit">
+        <button className="large" type="submit" disabled={newTodo == ''}>
           Add
         </button>
       </form>
