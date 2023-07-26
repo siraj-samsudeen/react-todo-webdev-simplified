@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -30,13 +31,14 @@ function App() {
   function addTodo(event) {
     event.preventDefault();
     const newTodoObj = {
-      id: todos.length + 1,
+      id: uuidv4(),
       text: newTodo,
       completed: false,
     };
     setTodos([...todos, newTodoObj]);
     setNewTodo('');
   }
+
   return (
     <div className="container">
       <h1>Todo List App</h1>
