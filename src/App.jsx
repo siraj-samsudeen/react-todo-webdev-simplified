@@ -2,11 +2,7 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-  const initialTodos = [
-    { id: 1, text: 'Todo1', completed: false },
-    { id: 2, text: 'Todo2', completed: true },
-  ];
-  const [todos, setTodos] = useState(initialTodos);
+  const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
 
   function toggleCompleted(todoId) {
@@ -47,24 +43,28 @@ function App() {
           Add
         </button>
       </form>
-      <h2>Todo Items</h2>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            <label>
-              <input
-                type="checkbox"
-                checked={todo.completed}
-                onChange={() => toggleCompleted(todo.id)}
-              />
-              {todo.text}
-            </label>
-            <button className="delete" onClick={() => deleteTodo(todo.id)}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+      {todos.length > 0 && (
+        <>
+          <h2>Todo Items</h2>
+          <ul>
+            {todos.map((todo) => (
+              <li key={todo.id}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={todo.completed}
+                    onChange={() => toggleCompleted(todo.id)}
+                  />
+                  {todo.text}
+                </label>
+                <button className="delete" onClick={() => deleteTodo(todo.id)}>
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 }
