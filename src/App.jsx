@@ -14,6 +14,11 @@ function App() {
     );
     setTodos(updatedTodos);
   }
+
+  function deleteTodo(todoId) {
+    const updatedTodos = todos.filter((todo) => todo.id != todoId);
+    setTodos(updatedTodos);
+  }
   return (
     <div className="container">
       <h1>Todo List App</h1>
@@ -36,7 +41,9 @@ function App() {
               />
               {todo.text}
             </label>
-            <button className="delete">Delete</button>
+            <button className="delete" onClick={() => deleteTodo(todo.id)}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>
