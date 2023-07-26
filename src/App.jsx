@@ -7,6 +7,7 @@ function App() {
     { id: 2, text: 'Todo2', completed: true },
   ];
   const [todos, setTodos] = useState(initialTodos);
+  const [newTodo, setNewTodo] = useState('');
 
   function toggleCompleted(todoId) {
     const updatedTodos = todos.map((todo) =>
@@ -19,12 +20,29 @@ function App() {
     const updatedTodos = todos.filter((todo) => todo.id != todoId);
     setTodos(updatedTodos);
   }
+
+  function addTodo(event) {
+    event.preventDefault();
+    const newTodoObj = {
+      id: todos.length + 1,
+      text: newTodo,
+      completed: false,
+    };
+    setTodos([...todos, newTodoObj]);
+    setNewTodo('');
+  }
   return (
     <div className="container">
       <h1>Todo List App</h1>
-      <form>
+      <form onSubmit={addTodo}>
         <label htmlFor="todo-text">New Item</label>
-        <input type="text" name="todo-text" id="todo-text" />
+        <input
+          type="text"
+          name="todo-text"
+          id="todo-text"
+          value={newTodo}
+          onChange={(event) => setNewTodo(event.target.value)}
+        />
         <button className="large" type="submit">
           Add
         </button>
