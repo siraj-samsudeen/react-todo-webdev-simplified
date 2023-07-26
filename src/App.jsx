@@ -38,6 +38,31 @@ function AddTodoForm({ newTodo, setNewTodo, setTodos }) {
     </form>
   );
 }
+
+function TodoItems({ todos, toggleCompleted, deleteTodo }) {
+  return (
+    <>
+      <h2>Todo Items</h2>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <label>
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => toggleCompleted(todo.id)}
+              />
+              {todo.text}
+            </label>
+            <button className="delete" onClick={() => deleteTodo(todo.id)}>
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
 function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
@@ -73,26 +98,11 @@ function App() {
         setTodos={setTodos}
       />
       {todos.length > 0 && (
-        <>
-          <h2>Todo Items</h2>
-          <ul>
-            {todos.map((todo) => (
-              <li key={todo.id}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={todo.completed}
-                    onChange={() => toggleCompleted(todo.id)}
-                  />
-                  {todo.text}
-                </label>
-                <button className="delete" onClick={() => deleteTodo(todo.id)}>
-                  Delete
-                </button>
-              </li>
-            ))}
-          </ul>
-        </>
+        <TodoItems
+          todos={todos}
+          toggleCompleted={toggleCompleted}
+          deleteTodo={deleteTodo}
+        />
       )}
     </div>
   );
