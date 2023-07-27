@@ -17,10 +17,6 @@ function AddTodoForm({ newTodo, setNewTodo, setTodos }) {
     inputRef.current.focus();
   }
 
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
-
   return (
     <form onSubmit={addTodo}>
       <label htmlFor="todo-text">New Item</label>
@@ -31,6 +27,7 @@ function AddTodoForm({ newTodo, setNewTodo, setTodos }) {
         value={newTodo}
         onChange={(event) => setNewTodo(event.target.value)}
         ref={inputRef}
+        autoFocus
       />
       <button className="large" type="submit" disabled={newTodo == ''}>
         Add
