@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { v4 as uuidv4 } from 'uuid';
 import { TodoItems } from './TodoItems';
 import { AddTodoForm } from './AddTodoForm';
 
@@ -15,7 +14,7 @@ function App() {
 
   function addTodo(newTodo) {
     const newTodoObj = {
-      id: uuidv4(),
+      id: crypto.randomUUID(),
       text: newTodo,
       completed: false,
     };
