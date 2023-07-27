@@ -22,15 +22,15 @@ function App() {
   }
 
   function toggleCompleted(todoId) {
-    const updatedTodos = todos.map((todo) =>
-      todo.id == todoId ? { ...todo, completed: !todo.completed } : todo
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id == todoId ? { ...todo, completed: !todo.completed } : todo
+      )
     );
-    setTodos(updatedTodos);
   }
 
   function deleteTodo(todoId) {
-    const updatedTodos = todos.filter((todo) => todo.id != todoId);
-    setTodos(updatedTodos);
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== todoId));
   }
 
   return (
