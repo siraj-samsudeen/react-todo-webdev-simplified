@@ -5,14 +5,9 @@ import { TodoItems } from './TodoItems';
 import { AddTodoForm } from './AddTodoForm';
 
 function App() {
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-    const todos = JSON.parse(localStorage.getItem('todos')) || [];
-    if (todos.length > 0) {
-      setTodos(todos);
-    }
-  }, []);
+  const [todos, setTodos] = useState(() => {
+    return JSON.parse(localStorage.getItem('todos')) || [];
+  });
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
