@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { v4 as uuidv4 } from 'uuid';
+import { TodoItems } from './TodoItems';
 
 function AddTodoForm({ newTodo, setNewTodo, setTodos }) {
   const inputRef = useRef(null);
@@ -36,30 +37,6 @@ function AddTodoForm({ newTodo, setNewTodo, setTodos }) {
   );
 }
 
-function TodoItems({ todos, toggleCompleted, deleteTodo }) {
-  return (
-    <>
-      <h2>Todo Items</h2>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            <label>
-              <input
-                type="checkbox"
-                checked={todo.completed}
-                onChange={() => toggleCompleted(todo.id)}
-              />
-              {todo.text}
-            </label>
-            <button className="delete" onClick={() => deleteTodo(todo.id)}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
-    </>
-  );
-}
 function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
