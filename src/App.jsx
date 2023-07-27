@@ -3,23 +3,19 @@ import './App.css';
 import { v4 as uuidv4 } from 'uuid';
 import { TodoItems } from './TodoItems';
 
-function AddTodoForm({ newTodo, setNewTodo, setTodos }) {
+function AddTodoForm({ addTodo }) {
+  const [newTodo, setNewTodo] = useState('');
   const inputRef = useRef(null);
 
-  function addTodo(event) {
+  function handleSubmit(event) {
     event.preventDefault();
-    const newTodoObj = {
-      id: uuidv4(),
-      text: newTodo,
-      completed: false,
-    };
-    setTodos((prevTodos) => [...prevTodos, newTodoObj]);
+    addTodo(newTodo);
     setNewTodo('');
     inputRef.current.focus();
   }
 
   return (
-    <form onSubmit={addTodo}>
+    <form onSubmit={handleSubmit}>
       <label htmlFor="todo-text">New Item</label>
       <input
         type="text"
@@ -39,7 +35,6 @@ function AddTodoForm({ newTodo, setNewTodo, setTodos }) {
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState('');
 
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem('todos')) || [];
@@ -51,6 +46,16 @@ function App() {
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
+
+  function addTodo(newTodo) {
+    const newTodoObj = {
+      id: uuidv4(),
+      text: newTodo,
+      completed: false,
+    };
+    setTodos((prevTodos) => [...prevTodos, newTodoObj]);
+  }
+
   function toggleCompleted(todoId) {
     const updatedTodos = todos.map((todo) =>
       todo.id == todoId ? { ...todo, completed: !todo.completed } : todo
@@ -66,11 +71,7 @@ function App() {
   return (
     <div className="container">
       <h1>Todo List App</h1>
-      <AddTodoForm
-        newTodo={newTodo}
-        setNewTodo={setNewTodo}
-        setTodos={setTodos}
-      />
+      <AddTodoForm addTodo={addTodo} />
       {todos.length > 0 && (
         <TodoItems
           todos={todos}
