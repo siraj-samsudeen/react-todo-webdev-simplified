@@ -1,8 +1,27 @@
-# React + Vite
+# TodoList App based on Web Dev Simplified Tutorial:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Covered in the tutorial:
+- [x] Add Todo
+- [x] Toggle Todo
+- [x] Delete Todo
+- [x] Store and Restore from Local Storage
 
-Currently, two official plugins are available:
+Extra User Features:
+- [ ] Add Todo
+- [ ] Edit 
+- [ ] Check for Duplicate when adding
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Tech Features:
+- [ ] Unit Testing
+- [ ] End-to-End Testing
+- [ ] Typescript
+- [ ] React Hook Form
+- [ ] Formik
+- [ ] React useContext
+- [ ] Redux
+- [ ] SASS
+- [ ] TailwindCSS
+- [ ] ChakraUI
+- [ ] MaterialUI
+- [ ] MantineUI
+- [ ] ShadCN
