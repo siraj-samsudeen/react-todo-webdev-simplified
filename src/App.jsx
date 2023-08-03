@@ -33,6 +33,11 @@ function App() {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== todoId));
   }
 
+  function editTodo(todoUpdated) {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => (todo.id === todoUpdated.id ? todoUpdated : todo))
+    );
+  }
   return (
     <div className="container">
       <h1>Todo List App</h1>
@@ -42,6 +47,7 @@ function App() {
           todos={todos}
           toggleCompleted={toggleCompleted}
           deleteTodo={deleteTodo}
+          onEditTodo={editTodo}
         />
       )}
     </div>
